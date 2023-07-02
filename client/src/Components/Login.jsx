@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { loginroute } from "../Routes/dbroute";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
-
   const [password, setpassword] = useState("");
 
   const handleusernameChange = (event) => {
@@ -26,8 +29,18 @@ const Login = () => {
 
   const handleloginsubmit = async (event) => {
     event.preventDefault();
-    if (inputvalidation()) {
-      console.log("vwg");
+    if (inputvalidation) {
+      const { data } = await axios.post(loginroute, {
+        username: username,
+        password: password
+      });
+      if (data.status === false) {
+        alert(data.msg);
+      }
+      if (data.status === true) {
+        localStorage.setItem("current-user", JSON.stringify(data.user));
+        navigate("/home");
+      }
     }
   };
   return (
