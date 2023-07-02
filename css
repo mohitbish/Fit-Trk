@@ -1,0 +1,39 @@
+Name: Raisin Black
+Hex: #202124
+RGB: (32, 33, 36)
+CMYK: 0.111, 0.083, 0, 0.858
+
+CHARLESTON GREEN	
+Name: Charleston Green
+Hex: #282C2F
+RGB: (40, 44, 47)
+CMYK: 0.148, 0.063, 0, 0.815
+
+ONYX	
+Name: Onyx
+Hex: #323639
+RGB: (50, 54, 57)
+CMYK: 0.122, 0.052, 0, 0.776
+
+LIGHT SILVER	
+Name: Light Silver
+Hex: #D6D6D7
+RGB: (214, 214, 215)
+CMYK: 0.004, 0.004, 0, 0.156
+
+
+
+
+# Resets index to former commit; replace '56e05fced' with your commit code
+git reset 56e05fced 
+
+# Moves pointer back to previous HEAD
+git reset --soft HEAD@{1}
+
+git commit -m "Revert to 56e05fced"
+
+# Updates working copy to reflect the new commit
+git reset --hard
+
+# Push your changes to respective branch
+git push -f

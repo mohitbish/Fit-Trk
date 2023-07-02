@@ -1,0 +1,35 @@
+Client => React, tailwind, react-router-dom, react-icons, axios
+Server => node, express, nodemon, mangodb, mongoose, cors, body-parser
+
+
+pages
+welcome[login, register]
+workout[make workout routine, workout routine]
+
+
+exercise Api => https://api-ninjas.com/api/exercises
+
+user{
+    name, email, password, height, weight, gender, Workouts:[workout], 
+}
+
+Muscle{
+    name
+}
+
+
+exercise = {
+    "name": "..."
+    "type": "strength",
+    "muscle": "biceps",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "instructions": "..."
+
+}
+
+workout = {
+    exercise-list:[{exercise,sets}]
+    Muscles-used : [muscles]
+
+}
