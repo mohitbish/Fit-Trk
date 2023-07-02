@@ -13,20 +13,20 @@ const Welcome = () => {
     <div className="w-[100vw] h-[100vh] bg-[#202124]">
       <div className=" h-[10vh] flex flex-row space justify-between px-5 sm:px-10   text-white border-2 border-gray-500">
         <Link
-          className="sm:text-xl py-5 sm:py-10 py-x sm:px-10 font-bond uppercase hover:bg-[#323639]"
+          className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 font-bond uppercase hover:bg-[#323639]"
           to="/"
         >
           fit-trk
         </Link>
 
         {logincheck ? (
-          <Link className="sm:text-xl py-5 sm:py-10 py-x sm:px-10 font-bond uppercase underline hover:bg-[#323639]"
+          <Link className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 font-bond uppercase underline hover:bg-[#323639]"
           onClick={changelogincheck}>
             sign-up
           </Link>
         ) : (
           <Link
-            className="sm:text-xl py-5 sm:py-10 py-x sm:px-10 font-bond uppercase underline hover:bg-[#323639]"
+            className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 font-bond uppercase underline hover:bg-[#323639]"
             onClick={changelogincheck}
           >
             Log In

@@ -83,7 +83,7 @@ const Register = () => {
           onChange={(e) => handlepasswordChange(e)}
         />
         <button
-          className="text-white  uppercase border-2 hover:bg-[#323639] px-4 py-3 my-4 mx-auto flex items-center"
+          className="text-white  uppercase border-2 hover:bg-[#323639] px-4 py-2 my-4 mx-auto flex items-center"
           type="submit"
         >
           sign-up
