@@ -16,6 +16,10 @@ module.exports.register = async (req, res, next) => {
       email,
       username,
       password: hashedPassword,
+      height:0,
+      weight: 0,
+      gender: '',
+      Workouts:[]
     });
     delete user.password;
     return res.json({ status: true, user });

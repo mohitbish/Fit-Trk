@@ -38,6 +38,7 @@ const Login = () => {
         alert(data.msg);
       }
       if (data.status === true) {
+        localStorage.clear();
         localStorage.setItem("current-user", JSON.stringify(data.user));
         navigate("/home");
       }

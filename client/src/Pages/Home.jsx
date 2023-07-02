@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-
-    const[user, setuser] = useState({})
-
+  const navigate = useNavigate();
+  const [user, setuser] = useState({});
+  console.log(user)
   useEffect(() => {
-    async function getuserData() {
-      try {
-         const data =localStorage.getItem("current-user");
-        setuser(JSON.parse(data))
-        console.log(user)
-      } catch (e) {
-        console.error(e);
+    (async () => {
+      if (!localStorage.getItem("current-user")) {
+        navigate("/");
+      } else {
+        setuser(
+          await JSON.parse(localStorage.getItem("current-user"))
+        );
+        
       }
-    }
-    getuserData();
-  }, []);
+    })();
+  }, [navigate]);
+
   return (
     <div>
-      <h1>home</h1>
+      <h1>hello {user.username} </h1>
     </div>
   );
 };
