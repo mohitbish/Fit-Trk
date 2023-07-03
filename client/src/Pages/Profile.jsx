@@ -31,22 +31,28 @@ const Profile = () => {
   const handleactivityChange = (event) => {
     setactivity(event.target.value);
   };
-  const handlegoalsChange =()=>{
-
+  const handlegoalsChange =(event)=>{
+    setgoals(event.target.value)
   }
 
   const inputvalidation = () => {
     if (height <= 20) {
-      alert("Enter coreect height");
+      alert("Enter correct height");
       return false;
     } else if (weight <= 20) {
-      alert("Enter coreect weight");
+      alert("Enter correct weight");
       return false;
     } else if (age <= 10 || age >= 110) {
-      alert("Enter coreect weight");
+      alert("Enter correct weight");
       return false;
     } else if (gender === "") {
       alert("select a gender");
+      return false;
+    }else if (activity === "") {
+      alert("select activiy level");
+      return false;
+    }else if (goals === "") {
+      alert("select goals");
       return false;
     }
     return true;
@@ -140,7 +146,7 @@ const Profile = () => {
           <option value="">activity-level</option>
           <option value="low">low(1-2 times per week)</option>
           <option value="moderate">moderate(3-4 times per week)</option>
-          <option value="">high(5-6 times per week)</option>
+          <option value="high">high(5-6 times per week)</option>
         </select>
 
         <label>Goals</label>

@@ -19,9 +19,9 @@ module.exports.register = async (req, res, next) => {
       height: 0,
       weight: 0,
       age: 0,
-      gender: '',
-      activity: '',
-      goals:'',
+      gender: "",
+      activity: "",
+      goals: "",
       Workouts: [],
     });
     delete user.password;
@@ -48,16 +48,18 @@ module.exports.login = async (req, res, next) => {
 };
 
 module.exports.infoupdate = async (req, res, next) => {
-  try { 
-    const username = req.body.username
+  try {
+    const username = req.body.username;
     const update = await User.updateOne(
-      { username: username},
+      { username: username },
       {
         $set: {
           weight: req.body.weight,
           height: req.body.height,
           age: req.body.age,
-          gender: req.body.gender
+          gender: req.body.gender,
+          activity: req.body.activity,
+          goals: req.body.goals,
         },
         $currentDate: { lastUpdated: true },
       }
