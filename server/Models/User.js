@@ -29,6 +29,15 @@ const userSchema = new mongoose.Schema({
   gender: {
     type: String,
   },
+  age:{
+    type:Number,
+  },
+  activity:{
+    type:String,
+  },
+  goals:{
+    type:String,
+  },
   Workouts:{
     type: Array,
   }

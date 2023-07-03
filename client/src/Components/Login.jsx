@@ -38,9 +38,15 @@ const Login = () => {
         alert(data.msg);
       }
       if (data.status === true) {
-        localStorage.clear();
-        localStorage.setItem("current-user", JSON.stringify(data.user));
-        navigate("/home");
+        if (data.user.height === 0) {
+          localStorage.clear();
+          localStorage.setItem("current-user", JSON.stringify(data.user));
+          navigate("/profile");
+        } else {
+          localStorage.clear();
+          localStorage.setItem("current-user", JSON.stringify(data.user));
+          navigate("/home");
+        }
       }
     }
   };

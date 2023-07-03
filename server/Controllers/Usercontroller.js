@@ -16,10 +16,13 @@ module.exports.register = async (req, res, next) => {
       email,
       username,
       password: hashedPassword,
-      height:0,
+      height: 0,
       weight: 0,
+      age: 0,
       gender: '',
-      Workouts:[]
+      activity: '',
+      goals:'',
+      Workouts: [],
     });
     delete user.password;
     return res.json({ status: true, user });
@@ -38,6 +41,28 @@ module.exports.login = async (req, res, next) => {
     if (!isPasswordValid)
       return res.json({ msg: "Incorrect Username or Password", status: false });
     delete user.password;
+    return res.json({ status: true, user });
+  } catch (ex) {
+    next(ex);
+  }
+};
+
+module.exports.infoupdate = async (req, res, next) => {
+  try { 
+    const username = req.body.username
+    const update = await User.updateOne(
+      { username: username},
+      {
+        $set: {
+          weight: req.body.weight,
+          height: req.body.height,
+          age: req.body.age,
+          gender: req.body.gender
+        },
+        $currentDate: { lastUpdated: true },
+      }
+    );
+    const user = await User.findOne({ username });
     return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
