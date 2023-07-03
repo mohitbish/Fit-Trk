@@ -43,11 +43,11 @@ const Home = () => {
   }, [username, calories]);
 
   return (
-    <div className="w-[100vw] h-[100vh] flex flex-row bg-[#202124]">
-      <div className="w-3/5">
-        <h1>bkjnlfck</h1>
+    <div className="w-[100vw] h-[100vh] flex sm:flex-row bg-[#202124]">
+      <div className="sm:w-3/5">
+        <h1 >Workouts</h1>
       </div>
-      <div className="w-2/5 flex flex-col items-center">
+      <div className="sm:w-2/5 flex flex-col items-center">
         <h2 className="uppercase text-center text-white mt-10">
           Calorie Information
         </h2>
@@ -61,15 +61,15 @@ const Home = () => {
         <tbody>
           <tr>
             <td className="py-2 px-4 border-b border-gray-500">Maintain Weight</td>
-            <td className="py-2 px-4 border-b border-gray-500">{calories}</td>
+            <td className="py-2 px-4 border-b border-gray-500">{calories} cal</td>
           </tr>
           <tr>
             <td className="py-2 px-4 border-b border-gray-500">Lose Weight</td>
-            <td className="py-2 px-4 border-b border-gray-500">{calories-100}</td>
+            <td className="py-2 px-4 border-b border-gray-500">{calories-100} cal</td>
           </tr>
           <tr>
             <td className="py-2 px-4 border-b border-gray-500">Gain Weight</td>
-            <td className="py-2 px-4 border-b border-gray-500">{calories+100}</td>
+            <td className="py-2 px-4 border-b border-gray-500">{calories+100} cal</td>
           </tr>
         </tbody>
       </table>
