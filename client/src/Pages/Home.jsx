@@ -73,6 +73,31 @@ const Home = () => {
           </tr>
         </tbody>
       </table>
+      <h2 className="uppercase text-center text-white mt-10">
+          Dialy Macros
+        </h2>
+        <table className="min-w-full border border-gray-500 my-4  text-white">
+        <thead>
+          <tr>
+            <th className="py-2 px-4 border-b border-gray-500">Macro</th>
+            <th className="py-2 px-4 border-b border-gray-500">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="py-2 px-4 border-b border-gray-500">Proteins</td>
+            <td className="py-2 px-4 border-b border-gray-500">{(weight*2)} gm</td>
+          </tr>
+          <tr>
+            <td className="py-2 px-4 border-b border-gray-500">Carbs</td>
+            <td className="py-2 px-4 border-b border-gray-500">{Math.round((calories-((weight*8)+ (calories*0.25)))/4)} gm</td>
+          </tr>
+          <tr>
+            <td className="py-2 px-4 border-b border-gray-500">Fats</td>
+            <td className="py-2 px-4 border-b border-gray-500"> {Math.round(calories/36)} gm</td>
+          </tr>
+        </tbody>
+      </table>
       </div>
     </div>
   );
