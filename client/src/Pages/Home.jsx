@@ -59,7 +59,10 @@ const Home = () => {
   return (
     <div className="w-[100vw] h-[100vh] flex sm:flex-row bg-[#202124]">
       <div className="sm:w-3/5">
-        {workout.map((e,index) => (<h1 key={index}  className="text-white">{e.name}</h1>))}
+      <h1 className="uppercase text-center text-white mt-10">
+          Workouts
+        </h1>
+        {workout.map((e,index) => (<h2 key={index}  className="text-white">{e.name}</h2>))}
         
       </div>
       <div className="sm:w-2/5 flex flex-col items-center">
