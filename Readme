@@ -8,6 +8,7 @@ workout[make workout routine, workout routine]
 
 
 exercise Api => https://api-ninjas.com/api/exercises
+api key = 5Gi2Spg6yLQb9wyKC4zKGA==dnbXycfZszOK3KAf
 
 user{
     name, email, password, height, weight, gender, Workouts:[workout], 
