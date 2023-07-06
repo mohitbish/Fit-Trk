@@ -10,8 +10,9 @@ const Home = () => {
   const [gender, setGender] = useState("");
   const [activity, setactivity] = useState("");
   const [calories, setCalories] = useState(0);
-  const [workout,setworkout]=useState([{}]);
-  const[srch,setsrch]=useState('')
+  const [workout, setworkout] = useState([{}]);
+  const [srch, setsrch] = useState("");
+  const [srcharry, setsrcharry] = useState([{}]);
 
   useEffect(() => {
     setusername(JSON.parse(localStorage.getItem("current-user")).username);
@@ -46,57 +47,61 @@ const Home = () => {
   }, [username, calories]);
 
   useEffect(() => {
-    console.log(workout)
+    console.log(workout);
   }, []);
 
-const handlesearchChange =  (event)=>{
-  setsrch(event.target.value)
-}
+  const handlesearchChange = (event) => {
+    setsrch(event.target.value);
+  };
 
-const excercisesearch = async(event)=>{
-  event.preventDefault()
-  const res = await axios({
-    method: "GET",
-    url:  `https://api.api-ninjas.com/v1/exercises?muscle=${srch}`,
-    headers: { "X-Api-Key": "5Gi2Spg6yLQb9wyKC4zKGA==dnbXycfZszOK3KAf" },
-    contentType: "application/json",
-  });
-  setworkout(res.data)
-}
+  const excercisesearch = async (event) => {
+    event.preventDefault();
+    const res = await axios({
+      method: "GET",
+      url: `https://api.api-ninjas.com/v1/exercises?muscle=${srch}`,
+      headers: { "X-Api-Key": "5Gi2Spg6yLQb9wyKC4zKGA==dnbXycfZszOK3KAf" },
+      contentType: "application/json",
+    });
+    setsrcharry(res.data);
+  };
+
+  const handlebtnclick = async (x)=>{
+
+    await setworkout(workout => [...workout, x])
+    console.log(workout)
+  }
 
   return (
     <div className="w-[100vw] h-[100vh] flex sm:flex-row bg-[#202124]">
       <div className="sm:w-3/5">
-        
-      <form
-        className="flex flex-col mx-20 mt-10 text-black"
-        action=""
-        onSubmit={(event) => excercisesearch(event)}
-      >
-
-        <input
-          className="my-2 p-2 bg-[#D6D6D7]"
-          type="twxt"
-          placeholder="..."
-          name="srch"
-          value={srch}
-          onChange={(e) => handlesearchChange(e)}
-        />
-        <button
-          className="text-white  uppercase border-2 hover:bg-[#323639] px-4 py-2 my-4 mx-auto flex items-center"
-          type="submit"
+        <form
+          className="flex flex-col mx-20 mt-10 text-black"
+          action=""
+          onSubmit={(event) => excercisesearch(event)}
         >
-          Search
-        </button>
-      </form>
+          <input
+            className="my-2 p-2 bg-[#D6D6D7]"
+            type="twxt"
+            placeholder="..."
+            name="srch"
+            value={srch}
+            onChange={(e) => handlesearchChange(e)}
+          />
+          <button
+            className="text-white  uppercase border-2 hover:bg-[#323639] px-4 py-2 my-4 mx-auto flex items-center"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
 
-
-
-      <h1 className="uppercase text-center text-white mt-10">
-          Workouts
-        </h1>
-        {workout.map((e,index) => (<h2 key={index}  className="text-white">{e.name}</h2>))}
-        
+        <h1 className="uppercase text-center text-white mt-10">Workouts</h1>
+        {srcharry.map((x, index) => (
+          <div key={index} className="flex fel-row justify-around">
+            <h2 className="text-white">{x.name}</h2>{" "}
+            <button className="text-white" onClick={()=>handlebtnclick(x)}>hello</button>
+          </div>
+        ))}
       </div>
       <div className="sm:w-2/5 flex flex-col items-center">
         <h2 className="uppercase text-center text-white mt-10">
