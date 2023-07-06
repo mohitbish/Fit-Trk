@@ -65,11 +65,13 @@ const Home = () => {
     setsrcharry(res.data);
   };
 
-  const handlebtnclick = async (x)=>{
-
-    await setworkout(workout => [...workout, x])
-    console.log(workout)
-  }
+  const handlebtnclick = (x) => {
+    setworkout((workout) => [...workout, x]);
+    console.log(workout);
+  };
+  const handlebtn2click = (x) => {
+    setworkout(workout.filter(item => item.name !== x.name));
+  };
 
   return (
     <div className="w-[100vw] h-[100vh] flex sm:flex-row bg-[#202124]">
@@ -99,7 +101,18 @@ const Home = () => {
         {srcharry.map((x, index) => (
           <div key={index} className="flex fel-row justify-around">
             <h2 className="text-white">{x.name}</h2>{" "}
-            <button className="text-white" onClick={()=>handlebtnclick(x)}>hello</button>
+            <button className="text-white" onClick={() => handlebtnclick(x)}>
+              add
+            </button>
+          </div>
+        ))}
+
+        {workout.map((x, index) => (
+          <div key={index} className="flex fel-row justify-around">
+            <h2 className="text-white">{x.name}</h2>{" "}
+            <button className="text-white" onClick={() => handlebtn2click(x)}>
+              delete
+            </button>
           </div>
         ))}
       </div>
