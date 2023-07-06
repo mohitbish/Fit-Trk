@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+
+import React, { useEffect, useState} from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [username, setusername] = useState("");
@@ -10,9 +10,7 @@ const Home = () => {
   const [gender, setGender] = useState("");
   const [activity, setactivity] = useState("");
   const [calories, setCalories] = useState(0);
-  const [workout, setworkout] = useState([{}]);
-  const [srch, setsrch] = useState("");
-  const [srcharry, setsrcharry] = useState([{}]);
+  
 
   useEffect(() => {
     setusername(JSON.parse(localStorage.getItem("current-user")).username);
@@ -46,77 +44,20 @@ const Home = () => {
     console.log(calories);
   }, [username, calories]);
 
-  useEffect(() => {
-    console.log(workout);
-  }, []);
-
-  const handlesearchChange = (event) => {
-    setsrch(event.target.value);
-  };
-
-  const excercisesearch = async (event) => {
-    event.preventDefault();
-    const res = await axios({
-      method: "GET",
-      url: `https://api.api-ninjas.com/v1/exercises?muscle=${srch}`,
-      headers: { "X-Api-Key": "5Gi2Spg6yLQb9wyKC4zKGA==dnbXycfZszOK3KAf" },
-      contentType: "application/json",
-    });
-    setsrcharry(res.data);
-  };
-
-  const handlebtnclick = (x) => {
-    setworkout((workout) => [...workout, x]);
-    console.log(workout);
-  };
-  const handlebtn2click = (x) => {
-    setworkout(workout.filter(item => item.name !== x.name));
-  };
+  
 
   return (
     <div className="w-[100vw] h-[100vh] flex sm:flex-row bg-[#202124]">
       <div className="sm:w-3/5">
-        <form
-          className="flex flex-col mx-20 mt-10 text-black"
-          action=""
-          onSubmit={(event) => excercisesearch(event)}
+      <Link
+          className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 font-bond uppercase text-white hover:bg-[#323639]"
+          to="/workout"
         >
-          <input
-            className="my-2 p-2 bg-[#D6D6D7]"
-            type="twxt"
-            placeholder="..."
-            name="srch"
-            value={srch}
-            onChange={(e) => handlesearchChange(e)}
-          />
-          <button
-            className="text-white  uppercase border-2 hover:bg-[#323639] px-4 py-2 my-4 mx-auto flex items-center"
-            type="submit"
-          >
-            Search
-          </button>
-        </form>
-
-        <h1 className="uppercase text-center text-white mt-10">Workouts</h1>
-        {srcharry.map((x, index) => (
-          <div key={index} className="flex fel-row justify-around">
-            <h2 className="text-white">{x.name}</h2>{" "}
-            <button className="text-white" onClick={() => handlebtnclick(x)}>
-              add
-            </button>
-          </div>
-        ))}
-
-        {workout.map((x, index) => (
-          <div key={index} className="flex fel-row justify-around">
-            <h2 className="text-white">{x.name}</h2>{" "}
-            <button className="text-white" onClick={() => handlebtn2click(x)}>
-              delete
-            </button>
-          </div>
-        ))}
+          Workout-split
+        </Link>
       </div>
-      <div className="sm:w-2/5 flex flex-col items-center">
+
+      <div className="sm:w-2/5 flex flex-col items-center mx-2">
         <h2 className="uppercase text-center text-white mt-10">
           Calorie Information
         </h2>
