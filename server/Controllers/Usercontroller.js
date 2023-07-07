@@ -22,6 +22,8 @@ module.exports.register = async (req, res, next) => {
       gender: "",
       activity: "",
       goals: "",
+      workoutsplit: "",
+      experience:"",
       Workouts: [],
     });
     delete user.password;
@@ -60,6 +62,8 @@ module.exports.infoupdate = async (req, res, next) => {
           gender: req.body.gender,
           activity: req.body.activity,
           goals: req.body.goals,
+          workoutsplit: req.body.workoutsplit,
+          experience: req.body.experience,
         },
         $currentDate: { lastUpdated: true },
       }

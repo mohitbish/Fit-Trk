@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
@@ -29,18 +28,24 @@ const userSchema = new mongoose.Schema({
   gender: {
     type: String,
   },
-  age:{
-    type:Number,
+  age: {
+    type: Number,
   },
-  activity:{
-    type:String,
+  activity: {
+    type: String,
   },
-  goals:{
-    type:String,
+  goals: {
+    type: String,
   },
-  Workouts:{
+  workoutsplit: {
+    type: String,
+  },
+  experience: {
+    type: String,
+  },
+  Workouts: {
     type: Array,
-  }
+  },
 });
 
 module.exports = mongoose.model("Users", userSchema);
