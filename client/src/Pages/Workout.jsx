@@ -50,7 +50,9 @@ const Workout = () => {
   };
   return (
     <div className="w-[100vw] h-[100vh] flex flex-col  bg-[#202124]">
-        <h1 className="text-xl-white text-center text-white my-4">Workout planner</h1>
+      <h1 className="text-xl-white text-center text-white my-4">
+        Workout planner
+      </h1>
       <div className="grid grid-cols-5 gap-4 text-white">
         {muscles.map((m, index) => (
           <button
@@ -62,7 +64,7 @@ const Workout = () => {
           </button>
         ))}
       </div>
-      <div className="mx-2" >
+      <div className="mx-2">
         <h1 className="uppercase text-center text-white mt-10">Workouts</h1>
 
         <div className="border-2 border-gray-500">
