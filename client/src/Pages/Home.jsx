@@ -1,6 +1,7 @@
-
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { getinfo } from "../Routes/dbroute";
 
 const Home = () => {
   const [username, setusername] = useState("");
@@ -10,7 +11,7 @@ const Home = () => {
   const [gender, setGender] = useState("");
   const [activity, setactivity] = useState("");
   const [calories, setCalories] = useState(0);
-  
+  const [workouts, setworkouts] = useState([]);
 
   useEffect(() => {
     setusername(JSON.parse(localStorage.getItem("current-user")).username);
@@ -19,6 +20,14 @@ const Home = () => {
     setAge(JSON.parse(localStorage.getItem("current-user")).age);
     setGender(JSON.parse(localStorage.getItem("current-user")).gender);
     setactivity(JSON.parse(localStorage.getItem("current-user")).activity);
+
+    const getdata = async () => {
+      const { data } = await axios.post(getinfo, {
+        username: JSON.parse(localStorage.getItem("current-user")).username,
+      });
+      setworkouts(data.user.Workouts);
+    };
+    getdata();
   }, []);
 
   useEffect(() => {
@@ -41,20 +50,38 @@ const Home = () => {
       }
     };
     calculateCalories();
-    console.log(calories);
+    console.log(workouts);
   }, [username, calories]);
 
-  
+
+ 
 
   return (
     <div className="w-[100vw] h-[100vh] flex sm:flex-row bg-[#202124]">
-      <div className="sm:w-3/5">
-      <Link
+      <div className="sm:w-3/5 flex flex-col">
+        <Link
           className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 font-bond uppercase text-white hover:bg-[#323639]"
           to="/workout"
         >
           Workout-split
         </Link>
+        <div className="border-2 border-gray-500">
+          {workouts.map((x, index) => (
+            <div key={index} className="flex fel-col justify-around">
+              <h2 className="text-white">{x.name}</h2>
+              <div className="text-white">
+                {workouts[
+                  workouts.findIndex((item) => item.name === x.name)
+                ].workoutarry.map((e, index) => {
+                  <li key={index} className="text-white">
+                    {e.name}
+                  </li>;
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+        
       </div>
 
       <div className="sm:w-2/5 flex flex-col items-center mx-2">

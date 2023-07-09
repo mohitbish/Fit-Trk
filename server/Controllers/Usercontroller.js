@@ -93,3 +93,13 @@ module.exports.workoutupdate = async (req, res, next) => {
     next(ex);
   }
 };
+
+module.exports.getinfo = async (req, res, next) => {
+  try {
+    const username = req.body.username;
+    const user = await User.findOne({ username });
+    return res.json({ status: true, user });
+  } catch (ex) {
+    next(ex);
+  }
+};
