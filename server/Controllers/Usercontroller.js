@@ -74,3 +74,22 @@ module.exports.infoupdate = async (req, res, next) => {
     next(ex);
   }
 };
+
+module.exports.workoutupdate = async (req, res, next) => {
+  try {
+    const username = req.body.username;
+    const update = await User.updateOne(
+      { username: username },
+      {
+        $set: {
+          Workouts:req.body.workouts
+        },
+        $currentDate: { lastUpdated: true },
+      }
+    );
+    const user = await User.findOne({ username });
+    return res.json({ status: true, user });
+  } catch (ex) {
+    next(ex);
+  }
+};
