@@ -36,11 +36,11 @@ const Welcome = () => {
         )}
       </div>
       <div className=" w-full h-[90vh] flex flex-col sm:flex-row space justify-between px-5 sm:px-10 py-10 sm:py-15  text-white border-2 border-gray-500">
-        <p className=" sm:w-3/5 h-2/5 sm:h-full  aling-centre">
+        <p className=" sm:w-1/2 h-2/5 sm:h-full  aling-centre">
           Some welcome text add passport js auth down in row for md and icons
           for sm
         </p>
-        <div className=" sm:w-2/5 h-3/5 sm:h-full mx-2 items-center">
+        <div className=" sm:w-1/2 h-3/5 sm:h-full mx-2 items-center">
           {logincheck ? <Login /> : <Register />}
         </div>
       </div>
