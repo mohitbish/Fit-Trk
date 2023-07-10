@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {workoutupdateroute} from '../Routes/dbroute'
+import { workoutupdateroute } from "../Routes/dbroute";
+import { Link } from "react-router-dom";
 
 const Workout = () => {
   const [username, setusername] = useState("");
   const [workoutsplit, setworkoutsplit] = useState("");
   const [days, setdays] = useState([]);
   const [day, setday] = useState([]);
-  const [muscle, setmuscle] = useState('');
+  const [muscle, setmuscle] = useState("");
   const [workout, setworkout] = useState([]);
   const [srcharry, setsrcharry] = useState([]);
   const [daycheck, setdaycheck] = useState(false);
@@ -99,19 +100,27 @@ const Workout = () => {
     console.log(days);
 
     const { data } = await axios.post(workoutupdateroute, {
-        username: username,
-        workouts: days
+      username: username,
+      workouts: days,
     });
     if (data.status === false) {
       alert(data.msg);
     }
     if (data.status === true) {
-      console.log("saved")
+      localStorage.clear();
+      localStorage.setItem("current-user", JSON.stringify(data.user));
+      console.log("saved");
     }
   };
 
   return (
     <div className="w-[100vw] h-[100vh] flex flex-col bg-[#202124]">
+        <Link
+          className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 font-bond uppercase text-white hover:bg-[#323639]"
+          to="/home"
+        >
+          Home
+        </Link>
       <h1 className="text-xl text-center text-white my-4">
         Workout planner for {workoutsplit} day/week
       </h1>
@@ -141,7 +150,9 @@ const Workout = () => {
       </div>
       <div className="flex flex-row  justify-evenly mx-2">
         <div>
-          <h1 className="uppercase text-center text-white mt-10">Exercise for {muscle}</h1>
+          <h1 className="uppercase text-center text-white mt-10">
+            Exercise for {muscle}
+          </h1>
 
           <div className="border-2 border-gray-500">
             {srcharry.map((x, index) => (

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { getinfo } from "../Routes/dbroute";
+import { Await, Link } from "react-router-dom";
 
 const Home = () => {
   const [username, setusername] = useState("");
@@ -11,7 +9,10 @@ const Home = () => {
   const [gender, setGender] = useState("");
   const [activity, setactivity] = useState("");
   const [calories, setCalories] = useState(0);
+  const [wkcheck, setwkcheck] = useState(true);
   const [workouts, setworkouts] = useState([]);
+  const [dayclick, setdayclick] = useState(false);
+  const [daylist, setdaylist] = useState([]);
 
   useEffect(() => {
     setusername(JSON.parse(localStorage.getItem("current-user")).username);
@@ -20,14 +21,7 @@ const Home = () => {
     setAge(JSON.parse(localStorage.getItem("current-user")).age);
     setGender(JSON.parse(localStorage.getItem("current-user")).gender);
     setactivity(JSON.parse(localStorage.getItem("current-user")).activity);
-
-    const getdata = async () => {
-      const { data } = await axios.post(getinfo, {
-        username: JSON.parse(localStorage.getItem("current-user")).username,
-      });
-      setworkouts(data.user.Workouts);
-    };
-    getdata();
+    setworkouts(JSON.parse(localStorage.getItem("current-user")).Workouts);
   }, []);
 
   useEffect(() => {
@@ -50,11 +44,26 @@ const Home = () => {
       }
     };
     calculateCalories();
-    console.log(workouts);
   }, [username, calories]);
 
+  useEffect(() => {
+    console.log(workouts);
+    if (workouts.length === 0) {
+      setwkcheck(false);
+    }
+    if (workouts.length !== 0) {
+      setwkcheck(true);
+    }
+  }, [workouts]);
 
- 
+  const btnclick = (data) => {
+    setdaylist(data);
+    console.log(daylist)
+  };
+
+  useEffect(()=>{
+    console.log(daylist)
+  },[daylist])
 
   return (
     <div className="w-[100vw] h-[100vh] flex sm:flex-row bg-[#202124]">
@@ -65,23 +74,31 @@ const Home = () => {
         >
           Workout-split
         </Link>
-        <div className="border-2 border-gray-500">
-          {workouts.map((x, index) => (
-            <div key={index} className="flex fel-col justify-around">
-              <h2 className="text-white">{x.name}</h2>
-              <div className="text-white">
-                {workouts[
-                  workouts.findIndex((item) => item.name === x.name)
-                ].workoutarry.map((e, index) => {
-                  <li key={index} className="text-white">
-                    {e.name}
-                  </li>;
-                })}
+        {wkcheck ? (
+          <div className="border-2 border-gray-500 flex flex-col">
+            {workouts.map((x, index) => (
+              <div key={index} className="flex fel-col justify-around">
+                <button
+                  className="text-white"
+                  onClick={() => btnclick(x.workoutarry)}
+                >
+                  {x.name}
+                </button>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        ) : (
+          <h1 className="text-white">Please choose workout</h1>
+        )}
+
+        <div className="border-2 border-gray-500 text-white space-y-2">
+          <h1> what'up?</h1>
+          {daylist.map((e, index) => {
+            <h1 key={index} className="text-white">
+              {e.name}
+            </h1>
+          })}
         </div>
-        
       </div>
 
       <div className="sm:w-2/5 flex flex-col items-center mx-2">
