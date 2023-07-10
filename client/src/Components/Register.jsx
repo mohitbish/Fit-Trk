@@ -35,7 +35,7 @@ const Register = () => {
 
   const handleregistersubmit = async (event) => {
     event.preventDefault();
-    if (inputvalidation) {
+    if (inputvalidation()) {
       const { data } = await axios.post(registerroute, {
         username: username,
         email: email,
