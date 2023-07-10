@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { infoupdateroute } from "../Routes/dbroute";
 
 const Profile = () => {
@@ -14,6 +14,31 @@ const Profile = () => {
   const [goals, setgoals] = useState("");
   const [workoutsplit, setworkoutsplit] = useState("");
   const [experience, setexperience] = useState("");
+  const [btnchange, setbtnchange] = useState(true);
+
+  useEffect(() => {
+    if (localStorage.getItem("current-user") === null) {
+      navigate("/");
+    } else {
+      setusername(JSON.parse(localStorage.getItem("current-user")).username);
+
+      if (JSON.parse(localStorage.getItem("current-user")).height !== 0) {
+        setheight(JSON.parse(localStorage.getItem("current-user")).height);
+        setweight(JSON.parse(localStorage.getItem("current-user")).weight);
+        setage(JSON.parse(localStorage.getItem("current-user")).age);
+        setgender(JSON.parse(localStorage.getItem("current-user")).gender);
+        setactivity(JSON.parse(localStorage.getItem("current-user")).activity);
+        setgoals(JSON.parse(localStorage.getItem("current-user")).goals);
+        setworkoutsplit(
+          JSON.parse(localStorage.getItem("current-user")).workoutsplit
+        );
+        setexperience(
+          JSON.parse(localStorage.getItem("current-user")).experience
+        );
+        setbtnchange(false);
+      }
+    }
+  }, []);
 
   const handleheightChange = (event) => {
     setheight(event.target.value);
@@ -85,7 +110,7 @@ const Profile = () => {
         activity: activity,
         goals: goals,
         workoutsplit: workoutsplit,
-        experience: experience
+        experience: experience,
       });
       if (data.status === false) {
         alert(data.msg);
@@ -98,18 +123,26 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    setusername(JSON.parse(localStorage.getItem("current-user")).username);
-  }, []);
-
   return (
-    <div className="w-[100vw] h-[100vh] flex flex-col justify-evenly bg-[#202124] items-center">
+    <div className=" relative w-[100vw] h-[100vh] flex flex-col justify-evenly bg-[#202124] items-center">
+      <Link
+        className={
+          btnchange
+            ? "hidden"
+            : "sm:text-xl py-4 sm:py-5 py-x sm:px-10 absolute left-0 top-0 font-bond uppercase underline text-white hover:bg-[#323639]"
+        }
+        to="/home"
+      >
+        Home
+      </Link>
       <div className="w-3/5">
         <h1 className="uppercase  text-xl text-center text-white my-5">
           Pls complete your profile
         </h1>
+
         <p className="text-white text-xs m-5">
-          This information helps in calculating your calorie requirments and suggesting appropiate workoutsplit
+          This information helps in calculating your calorie requirments and
+          suggesting appropiate workoutsplit
         </p>
       </div>
 
@@ -218,13 +251,21 @@ const Profile = () => {
             </select>
           </div>
         </div>
-
-        <button
-          className="text-white text-xl uppercase border-2 hover:bg-[#323639] px-4 py-2 mt-10 mx-auto flex items-center"
-          type="submit"
-        >
-          submit
-        </button>
+        {btnchange ? (
+          <button
+            className="text-white text-xl uppercase border-2 hover:bg-[#323639] px-4 py-2 mt-10 mx-auto flex items-center"
+            type="submit"
+          >
+            submit
+          </button>
+        ) : (
+          <button
+            className="text-white text-xl uppercase border-2 hover:bg-[#323639] px-4 py-2 mt-10 mx-auto flex items-center"
+            type="submit"
+          >
+            update
+          </button>
+        )}
       </form>
     </div>
   );

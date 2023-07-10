@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Await, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [username, setusername] = useState("");
@@ -68,12 +68,21 @@ const Home = () => {
   return (
     <div className="w-[100vw] h-[100vh] flex sm:flex-row bg-[#202124]">
       <div className="sm:w-3/5 flex flex-col">
+        <div className="felx flex-row justify-around my-10">
         <Link
           className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 font-bond uppercase text-white hover:bg-[#323639]"
           to="/workout"
         >
           Workout-split
         </Link>
+        <Link
+          className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 font-bond uppercase text-white hover:bg-[#323639]"
+          to="/profile"
+        >
+          Profile
+        </Link>
+        </div>
+        
         <div className="flex flex-row">
           {wkcheck ? (
             <div className="border-2 border-gray-500 w-2/5 flex flex-col">
