@@ -58,12 +58,12 @@ const Home = () => {
 
   const btnclick = (data) => {
     setdaylist(data);
-    console.log(daylist)
+    console.log(daylist);
   };
 
-  useEffect(()=>{
-    console.log(daylist)
-  },[daylist])
+  useEffect(() => {
+    console.log(daylist);
+  }, [daylist]);
 
   return (
     <div className="w-[100vw] h-[100vh] flex sm:flex-row bg-[#202124]">
@@ -74,30 +74,36 @@ const Home = () => {
         >
           Workout-split
         </Link>
-        {wkcheck ? (
-          <div className="border-2 border-gray-500 flex flex-col">
-            {workouts.map((x, index) => (
-              <div key={index} className="flex fel-col justify-around">
-                <button
-                  className="text-white"
-                  onClick={() => btnclick(x.workoutarry)}
-                >
-                  {x.name}
-                </button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <h1 className="text-white">Please choose workout</h1>
-        )}
+        <div className="flex flex-row">
+          {wkcheck ? (
+            <div className="border-2 border-gray-500 w-2/5 flex flex-col">
+              {workouts.map((x, index) => (
+                <div key={index} className="flex fel-col justify-around">
+                  <button
+                    className="text-white"
+                    onClick={() => btnclick(x.workoutarry)}
+                  >
+                    {x.name}
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <h1 className="text-white">Please choose workout</h1>
+          )}
 
-        <div className="border-2 border-gray-500 text-white space-y-2">
-          <h1> what'up?</h1>
-          {daylist.map((e, index) => {
-            <h1 key={index} className="text-white">
-              {e.name}
-            </h1>
-          })}
+          <div className="border-2 border-gray-500 w-3/5 text-white space-y-2">
+            <h1> Exercises</h1>
+            {daylist.length !== 0 ? (
+              <>
+                {daylist.map((e, index) => (
+                  <h1 key={index}>{e.name}</h1>
+                ))}
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </div>
 
