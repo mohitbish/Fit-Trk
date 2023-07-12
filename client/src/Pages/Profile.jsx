@@ -136,18 +136,19 @@ const Profile = () => {
         Home
       </Link>
       <div className="w-3/5">
-        <h1 className="uppercase  text-xl text-center text-white my-5">
-          Pls complete your profile
+
+        <h1 className="uppercase  text-xl text-center text-white font-bold my-5">
+          personal details
         </h1>
 
-        <p className="text-white text-xs m-5">
+        <p className="text-gray-500 text-center">
           This information helps in calculating your calorie requirments and
           suggesting appropiate workoutsplit
         </p>
       </div>
 
       <form
-        className="flex flex-col mx-20 mt-10 py-10 text-white"
+        className="flex flex-col mx-20 mt-8 py-10 text-white"
         action=""
         onSubmit={(event) => handleinfosubmit(event)}
       >
