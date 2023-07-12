@@ -245,9 +245,8 @@ const Profile = () => {
               onChange={(e) => handleexperienceChange(e)}
             >
               <option value="">Level</option>
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Expert">Expert</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
             </select>
           </div>
         </div>

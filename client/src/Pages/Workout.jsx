@@ -7,11 +7,13 @@ const Workout = () => {
   const [username, setusername] = useState("");
   const [workoutsplit, setworkoutsplit] = useState("");
   const [days, setdays] = useState([]);
-  const [day, setday] = useState([]);
+  const [day, setday] = useState("");
   const [muscle, setmuscle] = useState("");
   const [workout, setworkout] = useState([]);
   const [srcharry, setsrcharry] = useState([]);
   const [daycheck, setdaycheck] = useState(false);
+  const [experience, setexperience] = useState("");
+  const [searchcheck, setsearchcheck] = useState(false);
   const [muscles, setmuscles] = useState([
     "abdominals",
     "abductors",
@@ -35,6 +37,7 @@ const Workout = () => {
       JSON.parse(localStorage.getItem("current-user")).workoutsplit
     );
     setusername(JSON.parse(localStorage.getItem("current-user")).username);
+    setexperience(JSON.parse(localStorage.getItem("current-user")).experience);
   }, []);
 
   useEffect(() => {
@@ -61,14 +64,16 @@ const Workout = () => {
   }, [workoutsplit]);
 
   const excercisesearch = async (m) => {
+    setsearchcheck(true);
     const res = await axios({
       method: "GET",
-      url: `https://api.api-ninjas.com/v1/exercises?muscle=${m}`,
+      url: `https://api.api-ninjas.com/v1/exercises?muscle=${m}&difficulty=${experience}`,
       headers: { "X-Api-Key": "5Gi2Spg6yLQb9wyKC4zKGA==dnbXycfZszOK3KAf" },
       contentType: "application/json",
     });
     setsrcharry(res.data);
     setmuscle(m);
+    
   };
 
   const handledayChange = (value) => {
@@ -109,35 +114,39 @@ const Workout = () => {
     if (data.status === true) {
       localStorage.clear();
       localStorage.setItem("current-user", JSON.stringify(data.user));
-      console.log("saved");
+      alert("saved");
     }
   };
 
   return (
-    <div className="w-[100vw] h-[100vh] flex flex-col bg-[#202124]">
-        <Link
-          className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 font-bond uppercase text-white hover:bg-[#323639]"
-          to="/home"
-        >
-          Home
-        </Link>
-      <h1 className="text-xl text-center text-white my-4">
+    <div className="w-[100vw] h-[100vh] relative flex flex-col bg-[#202124]">
+      <Link
+        className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 absolute left-0 top-0 font-bond uppercase underline text-white hover:bg-[#323639]"
+        to="/home"
+      >
+        Home
+      </Link>
+      <h1 className="text-2xl text-center uppercase font-bold text-white mb-8 mt-4">
         Workout planner for {workoutsplit} day/week
       </h1>
-
-      <div className="flex flex-row justify-around my-10 text-white">
+      <h2 className="text-gray-500 text-center  uppercase mt-4 ">
+        select a day to edit
+      </h2>
+      <div className="flex flex-row justify-evenly my-4 text-white mx-10">
         {days.map((d, index) => (
           <button
             onClick={() => handledayChange(d.name)}
             key={index}
-            className="uppercase underline hover:bg-gray-500 "
+            className="uppercase font-semibold hover:bg-gray-500 border-2 border-gray-500 px-2"
           >
             {d.name}
           </button>
         ))}
       </div>
-
-      <div className="grid grid-cols-5 gap-4 text-white">
+      <h1 className="uppercase text-center text-gray-500 mt-10">
+        select a muscle to see exercises
+      </h1>
+      <div className="grid grid-cols-5 gap-4 text-white mx-4 my-4">
         {muscles.map((m, index) => (
           <button
             onClick={() => excercisesearch(m)}
@@ -148,53 +157,53 @@ const Workout = () => {
           </button>
         ))}
       </div>
-      <div className="flex flex-row  justify-evenly mx-2">
-        <div>
-          <h1 className="uppercase text-center text-white mt-10">
+      <div className="flex flex-row  mx-2">
+        <div className={searchcheck ? "w-3/5 mx-2" : "hidden"}>
+          <h1 className="uppercase text-center text-white mt-8 mb-2">
             Exercise for {muscle}
           </h1>
-
-          <div className="border-2 border-gray-500">
+          <div className="border-2 border-gray-500 grid grid-cols-2">
             {srcharry.map((x, index) => (
-              <div key={index} className="flex flex-row">
+              <div key={index} className="flex flex-row gap-2 ">
                 <h2 className="text-white">{x.name}</h2>{" "}
                 <button
-                  className="text-white "
+                  className="text-white font-bold"
                   onClick={() => handlebtnclick(x)}
                 >
-                  add
+                  [+]
                 </button>
               </div>
             ))}
           </div>
         </div>
         {daycheck ? (
-          <div>
-            <h1 className="uppercase text-center text-white mt-10">
+          <div className="w-2/5 relative mx-2">
+            <button
+              onClick={() => saveworkout()}
+              className="text-white uppercase border-2 border-gray-500  font-bold absolute top-0 right-0 mt-8 px-3 hover:bg-gray-400"
+            >
+              save
+            </button>
+            <h1 className="uppercase text-center text-white mt-8 mb-2">
               Workout for {day}
             </h1>
             <div className="border-2 border-gray-500">
               {workout.map((x, index) => (
-                <div key={index} className="flex fel-row justify-around">
+                <div key={index} className="flex fel-row gap-4 justify-center items-center">
                   <h2 className="text-white">{x.name}</h2>{" "}
                   <button
-                    className="text-white"
+                    className="text-white font-bold"
                     onClick={() => handlebtn2click(x)}
                   >
-                    delete
+                    [-]
                   </button>
                 </div>
               ))}
             </div>
-            <button
-              onClick={() => saveworkout()}
-              className="text-white border-2 border-gray-500 my-4"
-            >
-              save
-            </button>
+            
           </div>
         ) : (
-          <h1>select a day</h1>
+          <></>
         )}
       </div>
     </div>
