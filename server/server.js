@@ -1,22 +1,21 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-var cors = require('cors')
-var bodyParser = require('body-parser')
+var cors = require("cors");
+var bodyParser = require("body-parser");
+const request = require("supertest");
 const port = 8888;
 const MANGO_URL = "mongodb://localhost:27017/Fit-Trk";
-const Routes = require('./Routes');
+const Routes = require("./Routes");
 
-
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
-
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 mongoose
   .connect(MANGO_URL, {
@@ -29,7 +28,6 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
-
 
 app.use("/route", Routes);
 

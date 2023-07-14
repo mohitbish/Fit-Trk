@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const User = require("../Models/User");
 
 module.exports.register = async (req, res, next) => {
-  console.log("ye")
   try {
     const { username, email, password } = req.body;
     const usernameCheck = await User.findOne({ username });

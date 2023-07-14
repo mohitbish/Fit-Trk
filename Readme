@@ -1,5 +1,5 @@
 Client => React, tailwind, react-router-dom, react-icons, axios
-Server => node, express, nodemon, mangodb, mongoose, cors, body-parser
+Server => node, express, nodemon, mangodb, mongoose, cors, body-parser,jes
 
 
 pages
