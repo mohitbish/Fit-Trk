@@ -3,7 +3,6 @@ const app = express();
 const mongoose = require("mongoose");
 var cors = require("cors");
 var bodyParser = require("body-parser");
-const request = require("supertest");
 const port = 8888;
 const MANGO_URL = "mongodb://localhost:27017/Fit-Trk";
 const Routes = require("./Routes");

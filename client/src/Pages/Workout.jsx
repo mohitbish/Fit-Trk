@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { workoutupdateroute } from "../Routes/dbroute";
 import { Link } from "react-router-dom";
+import loadimg from '../Assests/loader.gif'
 
 const Workout = () => {
   const [username, setusername] = useState("");
@@ -14,6 +15,7 @@ const Workout = () => {
   const [daycheck, setdaycheck] = useState(false);
   const [experience, setexperience] = useState("");
   const [searchcheck, setsearchcheck] = useState(false);
+  const[isloading,setisloading]=useState(true)
   const [muscles, setmuscles] = useState([
     "abdominals",
     "abductors",
@@ -64,6 +66,7 @@ const Workout = () => {
   }, [workoutsplit]);
 
   const excercisesearch = async (m) => {
+    setisloading(true)
     setsearchcheck(true);
     const res = await axios({
       method: "GET",
@@ -72,6 +75,7 @@ const Workout = () => {
       contentType: "application/json",
     });
     setsrcharry(res.data);
+    setisloading(false)
     setmuscle(m);
   };
 
@@ -163,7 +167,7 @@ const Workout = () => {
         ))}
       </div>
       <div className="flex flex-col sm:flex-row  mx-2">
-        <div className={searchcheck ? "sm:w-1/2 mx-2" : "hidden"}>
+        {isloading?(<img src={loadimg} width={300} alt="loader" className={searchcheck ?("mx-2"):("hidden")}/>):(<div className={searchcheck ? "sm:w-1/2 mx-2" : "hidden"}>
           <h1 className="uppercase text-center text-white mt-8 mb-2">
             Exercise for {muscle}
           </h1>
@@ -180,7 +184,7 @@ const Workout = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div>)}
         {daycheck ? (
           <div className="sm:w-1/2 mx-2 ">
             <div className="flex flex-row justify-between">
