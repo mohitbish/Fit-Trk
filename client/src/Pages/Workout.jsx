@@ -73,7 +73,6 @@ const Workout = () => {
     });
     setsrcharry(res.data);
     setmuscle(m);
-    
   };
 
   const handledayChange = (value) => {
@@ -119,20 +118,26 @@ const Workout = () => {
   };
 
   return (
-    <div className="w-[100vw] h-[100vh] relative flex flex-col bg-[#202124]">
+    <div
+      className={
+        daycheck
+          ? "w-[100vw] h-[130vh] sm:h-[100vh] relative flex flex-col bg-[#202124]"
+          : "w-[100vw] h-[100vh] relative flex flex-col bg-[#202124]"
+      }
+    >
       <Link
         className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 absolute left-0 top-0 font-bond uppercase underline text-white hover:bg-[#323639]"
         to="/home"
       >
         Home
       </Link>
-      <h1 className="text-2xl text-center uppercase font-bold text-white mb-8 mt-4">
+      <h1 className="text-2xl text-center uppercase font-bold text-white  sm:mb-8 mt-12 sm:mt-4">
         Workout planner for {workoutsplit} day/week
       </h1>
-      <h2 className="text-gray-500 text-center  uppercase mt-4 ">
+      <h2 className="text-gray-500 text-center  uppercase  mt-2 sm:mt-4 ">
         select a day to edit
       </h2>
-      <div className="flex flex-row justify-evenly my-4 text-white mx-10">
+      <div className="flex flex-row justify-evenly  my-2 sm:my-4 text-white sm:mx-10">
         {days.map((d, index) => (
           <button
             onClick={() => handledayChange(d.name)}
@@ -143,28 +148,28 @@ const Workout = () => {
           </button>
         ))}
       </div>
-      <h1 className="uppercase text-center text-gray-500 mt-10">
+      <h1 className="uppercase text-center text-gray-500 mt-4 sm:mt-10">
         select a muscle to see exercises
       </h1>
-      <div className="grid grid-cols-5 gap-4 text-white mx-4 my-4">
+      <div className="grid  grid-cols-3 sm:grid-cols-5 gap-4 text-white  mx-4 my-2 sm:my-4">
         {muscles.map((m, index) => (
           <button
             onClick={() => excercisesearch(m)}
             key={index}
-            className="uppercase hover:bg-gray-500 border-2 border-gray-500"
+            className="uppercase  hover:bg-gray-500 border-2 border-gray-500"
           >
             {m}
           </button>
         ))}
       </div>
-      <div className="flex flex-row  mx-2">
-        <div className={searchcheck ? "w-3/5 mx-2" : "hidden"}>
+      <div className="flex flex-col sm:flex-row  mx-2">
+        <div className={searchcheck ? "sm:w-1/2 mx-2" : "hidden"}>
           <h1 className="uppercase text-center text-white mt-8 mb-2">
             Exercise for {muscle}
           </h1>
-          <div className="border-2 border-gray-500 grid grid-cols-2">
+          <div className="border-2 border-gray-500 grid grid-cols-2 sm:flex flex-col">
             {srcharry.map((x, index) => (
-              <div key={index} className="flex flex-row gap-2 ">
+              <div key={index} className="flex flex-row gap-1 sm:gap-2 mx-2">
                 <h2 className="text-white">{x.name}</h2>{" "}
                 <button
                   className="text-white font-bold"
@@ -177,19 +182,25 @@ const Workout = () => {
           </div>
         </div>
         {daycheck ? (
-          <div className="w-2/5 relative mx-2">
-            <button
-              onClick={() => saveworkout()}
-              className="text-white uppercase border-2 border-gray-500  font-bold absolute top-0 right-0 mt-8 px-3 hover:bg-gray-400"
-            >
-              save
-            </button>
+          <div className="sm:w-1/2 mx-2 ">
+            <div className="flex flex-row justify-between">
             <h1 className="uppercase text-center text-white mt-8 mb-2">
-              Workout for {day}
-            </h1>
+                Workout for {day}
+              </h1>
+              <button
+                onClick={() => saveworkout()}
+                className="text-white uppercase border-2 border-gray-500  font-bold  mt-8 px-3 hover:bg-gray-400"
+              >
+                save
+              </button>
+             
+            </div>
             <div className="border-2 border-gray-500">
               {workout.map((x, index) => (
-                <div key={index} className="flex fel-row gap-4 justify-center items-center">
+                <div
+                  key={index}
+                  className="flex fel-row gap-4  justify-center items-center"
+                >
                   <h2 className="text-white">{x.name}</h2>{" "}
                   <button
                     className="text-white font-bold"
@@ -200,7 +211,6 @@ const Workout = () => {
                 </div>
               ))}
             </div>
-            
           </div>
         ) : (
           <></>

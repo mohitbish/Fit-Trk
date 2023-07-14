@@ -63,8 +63,8 @@ const Home = () => {
   };
 
   return (
-    <div className="w-[100vw]  h-[100vh] flex  sm:flex-row bg-[#202124]">
-      <div className="sm:w-1/2  flex flex-col mx-2">
+    <div className={dayclick?("w-[100vw]  sm:h-[100vh] flex flex-col sm:flex-row bg-[#202124]"):("w-[100vw] h-[100vh] sm:h-[100vh] flex flex-col sm:flex-row bg-[#202124]")}>
+      <div className=" sm:w-1/2  flex flex-col mx-2">
         <Link
           className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 absolute left-0 top-0 font-bond uppercase underline text-white hover:bg-[#323639]"
           to="/workout"
@@ -72,7 +72,7 @@ const Home = () => {
           Workout-split
         </Link>
         <div className="flex flex-col">
-          <h2 className="uppercase text-center text-white text-xl mt-20">
+          <h2 className="uppercase text-center text-white text-xl mt-16 sm:mt-20">
             Workout-Schedule
           </h2>
           {wkcheck ? (
@@ -88,11 +88,11 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <h1 className="text-white text-xl">Please choose workout</h1>
+            <h1 className="text-gray-500 text-center my-2">[ Make your own workout-split ]</h1>
           )}
 
           <div className={dayclick ? "mx-20" : "hidden"}>
-            <h2 className="uppercase text-center text-xl text-white mt-20">
+            <h2 className="uppercase text-center text-xl text-white mt-10 sm:mt-20">
               Exercises for {day}
             </h2>
             <ul className="border-2 border-gray-500  text-white  flex flex-col  my-4">
@@ -112,7 +112,7 @@ const Home = () => {
 
       <div className=" relative sm:w-1/2 flex flex-col items-center mx-2 ">
         <Link
-          className="sm:text-xl py-4 sm:py-5 py-x sm:px-10  absolute right-0  top-0 font-bond uppercase underline  text-white hover:bg-[#323639]"
+          className="sm:text-xl py-4 sm:py-5 py-x sm:px-10  absolute  left-0 sm:right-0  top-0 font-bond uppercase underline  text-white hover:bg-[#323639]"
           to="/profile"
         >
           Profile
@@ -180,7 +180,7 @@ const Home = () => {
             <tr>
               <td className="py-2 px-4 border-2 border-gray-500">Fats</td>
               <td className="py-2 px-4 border-2 border-gray-500">
-                {" "}
+                
                 {Math.round(calories / 36)} gm
               </td>
             </tr>
