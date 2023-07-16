@@ -40,6 +40,7 @@ const Workout = () => {
     );
     setusername(JSON.parse(localStorage.getItem("current-user")).username);
     setexperience(JSON.parse(localStorage.getItem("current-user")).experience);
+    setdays(JSON.parse(localStorage.getItem("current-user")).Workouts);
   }, []);
 
   useEffect(() => {
