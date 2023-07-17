@@ -63,7 +63,7 @@ const Home = () => {
   };
 
   return (
-    <div className={dayclick?("w-[100vw]  sm:h-[100vh] flex flex-col sm:flex-row bg-[#202124]"):("w-[100vw] h-[100vh] sm:h-[100vh] flex flex-col sm:flex-row bg-[#202124]")}>
+    <div className={dayclick?("w-[100vw]  sm:h-screen flex flex-col sm:flex-row bg-[#202124]"):("w-full h-screen sm:h-[100vh] flex flex-col sm:flex-row bg-[#202124]")}>
       <div className=" sm:w-1/2  flex flex-col mx-2">
         <Link
           className="sm:text-xl py-4 sm:py-5 py-x sm:px-10 absolute left-0 top-0 font-bond uppercase underline text-white hover:bg-[#323639]"
