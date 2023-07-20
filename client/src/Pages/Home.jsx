@@ -76,6 +76,10 @@ const Home = () => {
             Workout-Schedule
           </h2>
           {wkcheck ? (
+           <>
+            <h2 className="text-gray-500 text-center  uppercase  mt-2 sm:mt-4 ">
+              select a day 
+             </h2>
             <div className="grid grid-cols-2 gap-2 my-4 mx-20">
               {workouts.map((x, index) => (
                 <button
@@ -87,6 +91,7 @@ const Home = () => {
                 </button>
               ))}
             </div>
+           </>
           ) : (
             <h1 className="text-gray-500 text-center my-2">[ Make your own workout-split ]</h1>
           )}
