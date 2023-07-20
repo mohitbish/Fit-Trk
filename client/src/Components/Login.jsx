@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { loginroute } from "../Routes/dbroute";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setpassword] = useState("");
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 3000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "light",
+  };
 
   const handleusernameChange = (event) => {
     setUsername(event.target.value);
@@ -18,10 +27,16 @@ const Login = () => {
 
   const inputvalidation = () => {
     if (username.length < 3) {
-      alert("Username should be greater than 3 characters.");
+      toast.error(
+        "Username should be greater than 3 characters.",
+        toastOptions
+      );
       return false;
     } else if (password.length < 8) {
-      alert("Password should be equal or greater than 8 characters.");
+      toast.error(
+        "Password should be equal or greater than 8 characters.",
+        toastOptions
+      );
       return false;
     }
     return true;
@@ -30,9 +45,10 @@ const Login = () => {
   const handleloginsubmit = async (event) => {
     event.preventDefault();
     if (inputvalidation) {
+      toast.success("Loading",toastOptions)
       const { data } = await axios.post(loginroute, {
         username: username,
-        password: password
+        password: password,
       });
       if (data.status === false) {
         alert(data.msg);
