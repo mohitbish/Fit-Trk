@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { registerroute } from "../Routes/dbroute";
+import { loginroute } from "../Routes/dbroute";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -57,6 +58,28 @@ const Register = () => {
       }
     }
   };
+
+  const handledemo = async()=>{
+    const { data } = await axios.post(loginroute, {
+      username: "Mohit",
+      password: "12345678"
+    });
+    if (data.status === false) {
+      alert(data.msg);
+    }
+    if (data.status === true) {
+      if (data.user.height === 0) {
+        localStorage.clear();
+        localStorage.setItem("current-user", JSON.stringify(data.user));
+        navigate("/profile");
+      } else {
+        localStorage.clear();
+        localStorage.setItem("current-user", JSON.stringify(data.user));
+        navigate("/home");
+      }
+    }
+  }
+
   return (
     <>
       <h1 className="uppercase text-center">new to app?</h1>
@@ -96,6 +119,12 @@ const Register = () => {
           sign-up  
         </button>
       </form>
+      <button
+          className="text-white  uppercase border-2 hover:bg-[#323639] px-4 py-2 my-4 mx-auto flex items-center"
+          onClick={()=>handledemo()}
+        >
+          Demo login 
+      </button>
     </>
   );
 };
