@@ -14,7 +14,7 @@ const Register = () => {
   const [password, setpassword] = useState("");
   const toastOptions = {
     position: "top-right",
-    autoClose: 3000,
+    autoClose: 9000,
     pauseOnHover: true,
     draggable: true,
     theme: "light",
@@ -80,7 +80,7 @@ const Register = () => {
   };
 
   const handledemo = async()=>{
-    toast.success("Registering",toastOptions)
+    toast.success("Loading",toastOptions)
     const { data } = await axios.post(loginroute, {
       username: "Mohit",
       password: "12345678"

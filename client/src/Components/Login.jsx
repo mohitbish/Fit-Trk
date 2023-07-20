@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setpassword] = useState("");
   const toastOptions = {
     position: "top-right",
-    autoClose: 3000,
+    autoClose: 9000,
     pauseOnHover: true,
     draggable: true,
     theme: "light",
