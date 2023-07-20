@@ -86,7 +86,7 @@ const Register = () => {
       password: "12345678"
     });
     if (data.status === false) {
-      alert(data.msg);
+      toast.error(data.msg,toastOptions );
     }
     if (data.status === true) {
       if (data.user.height === 0) {
@@ -146,6 +146,7 @@ const Register = () => {
         >
           Demo login 
       </button>
+      <ToastContainer />
     </>
   );
 };

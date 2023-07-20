@@ -51,7 +51,7 @@ const Login = () => {
         password: password,
       });
       if (data.status === false) {
-        alert(data.msg);
+        toast.error(data.msg,toastOptions );
       }
       if (data.status === true) {
         if (data.user.height === 0) {
