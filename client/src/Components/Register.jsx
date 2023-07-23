@@ -80,7 +80,7 @@ const Register = () => {
   };
 
   const handledemo = async()=>{
-    toast.success("Loading",toastOptions)
+    toast.success("Loading,pls allow extra time on first try",toastOptions)
     const { data } = await axios.post(loginroute, {
       username: "Mohit",
       password: "12345678"
