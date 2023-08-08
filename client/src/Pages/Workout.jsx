@@ -99,7 +99,7 @@ const Workout = () => {
 
   const handlebtnclick = async (x) => {
     if (workout.includes(x)) {
-      alert("already added");
+      toast.warning("Already added",toastOptions);
     } else {
       setworkout((workout) => [...workout, x]);
     }
@@ -115,14 +115,13 @@ const Workout = () => {
     const newarry = days;
     newarry[index] = x;
     setdays(newarry);
-    console.log(days);
 
     const { data } = await axios.post(workoutupdateroute, {
       username: username,
       workouts: days,
     });
     if (data.status === false) {
-      alert(data.msg);
+      toast.error(data.msg,toastOptions)
     }
     if (data.status === true) {
       localStorage.clear();
