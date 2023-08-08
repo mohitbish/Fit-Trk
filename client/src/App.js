@@ -4,6 +4,7 @@ import Welcome from './Pages/Welcome';
 import Home from './Pages/Home';
 import Profile from './Pages/Profile';
 import Workout from './Pages/Workout';
+import { ToastContainer, toast } from "react-toastify";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/workout" element={<Workout />}/>
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }

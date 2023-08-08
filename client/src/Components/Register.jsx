@@ -146,7 +146,6 @@ const Register = () => {
         >
           Demo login 
       </button>
-      <ToastContainer />
     </>
   );
 };

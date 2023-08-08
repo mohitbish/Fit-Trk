@@ -3,8 +3,17 @@ import axios from "axios";
 import { workoutupdateroute } from "../Routes/dbroute";
 import { Link } from "react-router-dom";
 import loadimg from '../Assests/loader.gif'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Workout = () => {
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 9000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "light",
+  };
   const [username, setusername] = useState("");
   const [workoutsplit, setworkoutsplit] = useState("");
   const [days, setdays] = useState([]);
@@ -118,7 +127,7 @@ const Workout = () => {
     if (data.status === true) {
       localStorage.clear();
       localStorage.setItem("current-user", JSON.stringify(data.user));
-      alert("saved");
+      toast.success("Saved",toastOptions)
     }
   };
 
